@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+
+  ankete_db:
+
+    image: postgres
+    ports: 
+      - "54320:5432"
+    container_name: ankete_db
+
+  ankete:
+
+    build: .
+    container_name: ankete
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ankete_db
