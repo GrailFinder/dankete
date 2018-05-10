@@ -1,8 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from django.contrib.auth.models import User
 from ankete.models import Inquiry, Question, Answer
 
 class InquirySerializer(ModelSerializer):
+    questions = PrimaryKeyRelatedField(many=True, read_only=True)
     class Meta:
         model = Inquiry
         fields = [
@@ -23,8 +24,7 @@ class QuestionSerializer(ModelSerializer):
     class Meta:
         model = Question
         fields = ['id', 'title',
-        'created_at', 'multiansw',
-        'answers']
+        'created_at', 'multiansw',]
 
 class AnswerSerializer(ModelSerializer):
     class Meta:

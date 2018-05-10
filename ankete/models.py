@@ -15,7 +15,7 @@ class Choice(models.Model):
     text = models.TextField(null=False)
     value = models.IntegerField(null=True, blank=True)
     created_at = models.DateTimeField(null=False, auto_now=True)
-    question_id = models.ForeignKey('Question', on_delete=models.CASCADE)
+    question_id = models.ForeignKey('Question', on_delete=models.CASCADE, related_name="answers")
 
 
     def __str__(self):
@@ -26,7 +26,7 @@ class Question(models.Model):
     title = models.TextField(null=False)
     created_at = models.DateTimeField(null=False, auto_now=True)
     multiansw = models.BooleanField(default=False)
-    inqiury_id = models.ForeignKey('Inquiry', on_delete=models.CASCADE)
+    inqiury_id = models.ForeignKey('Inquiry', on_delete=models.CASCADE, related_name="questions")
 
     def __str__(self):
         return f'{self.title}: {self.id}'
