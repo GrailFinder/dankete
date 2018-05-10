@@ -1,7 +1,7 @@
 brmt
 db.sqlite3
-ankete/__pycache__
-ankete/api/__pycache__
-ankete/management/__pycache__
-ankete/migrations/__pycache__
+__pycache__
+migrations
 *.pyc
+make_admin
+migrate

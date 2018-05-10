@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from ankete.api.views import InquiryListView, QuestionListView, UserListView, InquiryRetrieveView
 from ankete.views import ping
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -25,3 +26,5 @@ urlpatterns = [
     url(r'^api/inquiry/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
     url(r'^api/users/$', UserListView.as_view(), name="user_list"),
 ]
+
+urlpatterns += staticfiles_urlpatterns()  # https://stackoverflow.com/questions/12800862/how-to-make-django-serve-static-files-with-gunicorn

@@ -13,7 +13,7 @@ services:
 
     build: .
     container_name: ankete
-    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn -b=0.0.0.0:8000 ankete.wsgi
     volumes:
       - .:/code
     ports:
