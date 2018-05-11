@@ -13,18 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from ankete.api.views import InquiryListView, QuestionListView, UserListView, InquiryRetrieveView
+from ankete.api.views import InquiryListView, QuestionListView, UserListView, InquiryRetrieveView, UserRetrieveView
 from ankete.views import ping
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^ping/$', ping),
     url(r'^api/inquiries/$', InquiryListView.as_view(), name="inquiry_list"),
     url(r'^api/inquiry/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
     url(r'^api/users/$', UserListView.as_view(), name="user_list"),
+    url(r'^api/users/(?P<pk>[0-9a-f-]+)/$', UserRetrieveView.as_view(), name="user"),
 ]
 
 urlpatterns += staticfiles_urlpatterns()  # https://stackoverflow.com/questions/12800862/how-to-make-django-serve-static-files-with-gunicorn
