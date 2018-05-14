@@ -1,8 +1,8 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework import permissions
 from django.contrib.auth.models import User
-from ankete.models import Inquiry, Question
-from ankete.api.serializers import InquirySerializer, UserSerializer, QuestionSerializer
+from ankete.models import Inquiry, Question, Choice, Answer
+from ankete.api.serializers import InquirySerializer, UserSerializer, QuestionSerializer, ChoiceSerializer, AnswerSerializer
 from ankete.api.permissions import IsOwnerOrReadOnly
 
 
@@ -25,6 +25,19 @@ class InquiryRetrieveView(RetrieveUpdateDestroyAPIView):
 class QuestionListView(ListAPIView):
     serializer_class = QuestionSerializer
     queryset = Question.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+# choices
+class ChoiceListView(ListAPIView):
+    serializer_class = ChoiceSerializer
+    queryset = Choice.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+
+
+# answers
+class AnswerListView(ListAPIView):
+    serializer_class = AnswerSerializer
+    queryset = Answer.objects.all()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 # users

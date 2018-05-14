@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from ankete.api.views import InquiryListView, QuestionListView, UserListView, InquiryRetrieveView, UserRetrieveView
+from ankete.api.views import (InquiryListView, QuestionListView, UserListView,
+ InquiryRetrieveView, UserRetrieveView, ChoiceListView, AnswerListView)
 from ankete.views import ping
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
@@ -33,6 +34,8 @@ urlpatterns = [
     url(r'^api/inqs/$', InquiryListView.as_view(), name="inquiry-list"),
     url(r'^api/inqs/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
     url(r'^api/quests/$', QuestionListView.as_view(), name="question-list"),
+    url(r'^api/choices/$', ChoiceListView.as_view(), name="choice-list"),
+    url(r'^api/answers/$', AnswerListView.as_view(), name="answer-list"),
     url(r'^api/users/$', UserListView.as_view(), name="user-list"),
     url(r'^api/users/(?P<pk>[0-9a-f-]+)/$', UserRetrieveView.as_view(), name="user"),
 

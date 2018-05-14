@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from django.contrib.auth.models import User
-from ankete.models import Inquiry, Question, Answer
+from ankete.models import Inquiry, Question, Choice
 from rest_framework import serializers
 
 class InquirySerializer(ModelSerializer):
@@ -26,7 +26,7 @@ class UserSerializer(ModelSerializer):
 
 class QuestionSerializer(ModelSerializer):
     answers = PrimaryKeyRelatedField(many=True, read_only=True)
-    
+
     class Meta:
         model = Question
         fields = ['id',
@@ -36,8 +36,21 @@ class QuestionSerializer(ModelSerializer):
             'answers',
             ]
 
+class ChoiceSerializer(ModelSerializer):
+    class Meta:
+        model = Choice
+        fields = ['id',
+        'text',
+        'created_at',
+        'value',
+        ]
+
 class AnswerSerializer(ModelSerializer):
     class Meta:
-        model = Answer
-        fields = ['id', 'text', 'created_at',
-        'value']
+        fields = [
+            'id',
+            'choice_id',
+            'question_id',
+            'inqiury_id',
+            'created_at',
+        ]
