@@ -10,4 +10,4 @@ After creator registers and creates questionnaries, it gets published one the si
 ![db_models](closet/db_models.png "db_models")
 
 ## Where is the front?
-I am no frontender. Any help with front is needed.
+Any help with front is needed.

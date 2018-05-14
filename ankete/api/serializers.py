@@ -25,10 +25,16 @@ class UserSerializer(ModelSerializer):
         'email', 'date_joined', 'last_login']
 
 class QuestionSerializer(ModelSerializer):
+    answers = PrimaryKeyRelatedField(many=True, read_only=True)
+    
     class Meta:
         model = Question
-        fields = ['id', 'title',
-        'created_at', 'multiansw',]
+        fields = ['id',
+            'title',
+            'created_at',
+            'multiansw',
+            'answers',
+            ]
 
 class AnswerSerializer(ModelSerializer):
     class Meta:

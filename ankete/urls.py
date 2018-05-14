@@ -20,6 +20,7 @@ from ankete.views import ping
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from rest_framework_swagger.views import get_swagger_view
+from .views import api_root, InquiryHighlight
 
 schema_view = get_swagger_view(title='Ankete API')
 
@@ -28,10 +29,16 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^ping/$', ping),
     url(r'^docs/$', schema_view),
-    url(r'^api/inquiries/$', InquiryListView.as_view(), name="inquiry_list"),
-    url(r'^api/inquiry/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
-    url(r'^api/users/$', UserListView.as_view(), name="user_list"),
+
+    url(r'^api/inqs/$', InquiryListView.as_view(), name="inquiry-list"),
+    url(r'^api/inqs/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
+    url(r'^api/quests/$', QuestionListView.as_view(), name="question-list"),
+    url(r'^api/users/$', UserListView.as_view(), name="user-list"),
     url(r'^api/users/(?P<pk>[0-9a-f-]+)/$', UserRetrieveView.as_view(), name="user"),
+
+    
+    url(r'^$', api_root),
+    url(r'^inqs/(?P<pk>[0-9]+)/highlight/$', InquiryHighlight.as_view()),
 ]
 
 urlpatterns += staticfiles_urlpatterns()  # https://stackoverflow.com/questions/12800862/how-to-make-django-serve-static-files-with-gunicorn
