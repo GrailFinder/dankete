@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # addons
     'rest_framework',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [

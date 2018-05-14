@@ -19,10 +19,15 @@ from ankete.api.views import InquiryListView, QuestionListView, UserListView, In
 from ankete.views import ping
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Ankete API')
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^ping/$', ping),
+    url(r'^docs/$', schema_view),
     url(r'^api/inquiries/$', InquiryListView.as_view(), name="inquiry_list"),
     url(r'^api/inquiry/(?P<pk>[0-9a-f-]+)/$', InquiryRetrieveView.as_view(), name="inquiry"),
     url(r'^api/users/$', UserListView.as_view(), name="user_list"),
