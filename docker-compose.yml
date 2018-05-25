@@ -13,9 +13,9 @@ services:
 
     build: .
     container_name: ankete
-    command: gunicorn -b=0.0.0.0:8000 ankete.wsgi
-    volumes:
-      - .:/code
+    command: gunicorn -b 0.0.0.0:8000 ankete.wsgi
+    # volumes:
+    #   - .:/code
     ports:
       - "8000:8000"
     depends_on:
