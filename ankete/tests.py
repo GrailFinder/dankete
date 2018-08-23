@@ -6,8 +6,9 @@ from django.urls import resolve
 
 class InquiryTestCase(TestCase):
     def setUp(self):
-        #user = User.objects.create(user="grail", email="grail@test.com", password="test")
-        Inquiry.objects.create(title="test one", description="to test")
+        user = User.objects.create(username="grail", email="grail@test.com", password="test")
+        print(user)
+        Inquiry.objects.create(title="test one", description="to test", owner=user)
 
     def test_inq(self):
         inq = Inquiry.objects.get(title="test one")

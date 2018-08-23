@@ -3,14 +3,12 @@ version: '3'
 services:
 
   ankete_db:
-
     image: postgres
     ports: 
       - "54320:5432"
     container_name: ankete_db
 
   ankete:
-
     build: .
     container_name: ankete
     command: gunicorn -b 0.0.0.0:8000 ankete.wsgi
@@ -20,3 +18,13 @@ services:
       - "8000:8000"
     depends_on:
       - ankete_db
+
+  # newman:
+  #   image: postman/newman_ubuntu1404
+  #   container_name: newman
+  #   command: run /postman/dankete.postman_collection.json -e /postman/dankete.postman_environment.json
+  #   depends_on:
+  #     - ankete
+  #   volumes:
+  #     - ./postman:/postman
+  #   restart: on-failure

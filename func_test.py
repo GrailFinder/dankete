@@ -17,8 +17,11 @@ class NewVisitorTest(unittest.TestCase):
         assert "Django" in self.browser.title
 
         # she follows to inquires page
+        self.browser.find_element_by_xpath("//a[contains(@href, 'inqs')]").click()
+        assert "Inquiry List" in self.browser.page_source
 
         # picks: WHo are you from the Star Wars? query
+        assert "Who are you from the Star Wars?" in self.browser.page_source
 
         # checks some checkboxes/radio buttons and clicks submit button
 

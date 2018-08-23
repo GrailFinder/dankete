@@ -1,0 +1,200 @@
+{
+	"info": {
+		"_postman_id": "aa2a25d1-5dce-445b-9198-30142f83e11b",
+		"name": "dankete",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "start",
+			"description": "",
+			"item": [
+				{
+					"name": "home",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "396c0e7e-3604-4175-af81-c863a00179bf",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{api}}/",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "home page"
+					},
+					"response": []
+				},
+				{
+					"name": "login Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2a147ec9-64b6-4ab0-b633-f8bb1ee33ce0",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"status code is 200\"] = responseCode.code === 200;",
+									"",
+									"var json = JSON.parse(responseBody);",
+									"if (json.jwt !== \"\") {",
+									"    postman.setEnvironmentVariable(\"jwt\", json.auth_token);",
+									"}",
+									"if(responseCode.code !== 200)",
+									"{",
+									"    console.log(json.error);",
+									"    console.log(JSON.stringify(request.data));",
+									"}"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "212",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api}}/auth/login",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "This endpoint causes the server to send custom set of response headers. Providing header values as part of the URL parameters of a `GET` request to this endpoint returns the same as part of response header.\n\nTo send your own set of headers, simply add or replace the the URL parameters with your own set."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"description": "",
+			"item": [
+				{
+					"name": "list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a1706708-906d-491d-9b76-e49ae2c7f54f",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{api}}/api/users",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "inquiries",
+			"description": "",
+			"item": [
+				{
+					"name": "list",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f87c2857-a3a6-47db-a715-2604ed01e293",
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"status code is 200\"] = responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{api}}/api/inqs",
+							"host": [
+								"{{api}}"
+							],
+							"path": [
+								"api",
+								"inqs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "212",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "admin",
+				"type": "string"
+			}
+		]
+	}
+}

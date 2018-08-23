@@ -1,13 +1,16 @@
 from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
 from django.contrib.auth.models import User
 from ankete.models import Inquiry, Question, Choice
-from rest_framework import serializers
+from rest_framework import serializers, mixins
 
 
 class UserSerializer(ModelSerializer):
+
+    inquiries = serializers.PrimaryKeyRelatedField(many=True, queryset=Inquiry.objects.all())
+
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'date_joined', 'last_login']
+        fields = ['id', 'username', 'email', 'date_joined', 'last_login', 'inquiries']
 
 
 class QuestionSerializer(ModelSerializer):
@@ -27,8 +30,8 @@ class QuestionSerializer(ModelSerializer):
 
 class InquirySerializer(ModelSerializer):
     #questions = PrimaryKeyRelatedField(many=True, read_only=True)
-    #owner = serializers.ReadOnlyField(source="owner.username")
-    owner = PrimaryKeyRelatedField(many=True, read_only=True)
+    owner = serializers.ReadOnlyField(source="owner.username")
+    #owner = PrimaryKeyRelatedField(read_only=True)
     questions = QuestionSerializer(many=True)
 
     class Meta:

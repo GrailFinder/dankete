@@ -10,6 +10,7 @@ class Answer(models.Model):
     inqiury_id = models.ForeignKey('Inquiry', on_delete=models.CASCADE)
     created_at = models.DateTimeField(null=False, auto_now=True)
 
+
 class Choice(models.Model):
     id = models.CharField(max_length=128, null=False, unique=True, primary_key=True, default=uuid.uuid1)
     text = models.TextField(null=False)
@@ -17,9 +18,9 @@ class Choice(models.Model):
     created_at = models.DateTimeField(null=False, auto_now=True)
     question_id = models.ForeignKey('Question', on_delete=models.CASCADE, related_name="answers")
 
-
     def __str__(self):
         return f'{self.text}: {self.id}'
+
 
 class Question(models.Model):
     id = models.CharField(max_length=128, null=False, unique=True, primary_key=True, default=uuid.uuid1)
@@ -37,7 +38,7 @@ class Inquiry(models.Model):
     title = models.TextField(null=False)
     created_at = models.DateTimeField(null=False, auto_now=True)
     description = models.TextField(null=True)
-    owner = models.ManyToManyField(User)
+    owner = models.ForeignKey(User, related_name='inquiries', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.title}: {self.id}'
