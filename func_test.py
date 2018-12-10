@@ -1,10 +1,14 @@
+#!/usr/bin/env python
 from selenium import webdriver
-import unittest
+import unittest, os
 
 
 class NewVisitorTest(unittest.TestCase):
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        print(os.getcwd())
+        chromedriver_path = os.path.join(os.getcwd(), "closet/geckodriver")
+        print(chromedriver_path)
+        self.browser = webdriver.Firefox(executable_path="closet/geckodriver")
 
     def tearDown(self):
         self.browser.quit()

@@ -6,3 +6,4 @@ migrations
 make_admin
 migrate
 run_tests
+*.log
